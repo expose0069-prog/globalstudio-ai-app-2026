@@ -23,14 +23,15 @@ jobs:
     - name: Setup Android SDK
       uses: android-actions/setup-android@v4
 
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@v4
 
     - name: Build with Gradle
-      run: ./gradlew assembleDebug
+      run: gradle --no-daemon :app:assembleDebug
 
     - name: Upload APK
       uses: actions/upload-artifact@v4
       with:
         name: GlobalStudioAI-debug-APK
         path: app/build/outputs/apk/debug/app-debug.apk
+
